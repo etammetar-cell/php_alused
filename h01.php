@@ -57,10 +57,9 @@
 
     <div class="container">
         <?php for ($i=0; $i < count($margid); $i++) { ?>
-            
-            <div class="row">
+        <div class="row">
             <div class="col-sm-3">
-            <img src="https://picsum.photos/id/1020/200/200" alt="autopilt" class="img-fluid">
+                <img src="https://picsum.photos/id/1020/200/200" alt="autopilt" class="img-fluid">
             </div>
             <div class="col-sm-9"><?php echo $margid[$i];  ?></div>
         </div>
