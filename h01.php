@@ -8,14 +8,37 @@
   </head>
   <body>
     <h1>Harjutus 01 - muutujad</h1>
-     <?php
+    <?php
         $nimi = "Imre";
         $synniaasta = 1990;
         $tahtkuju = "jäär";
-        
-        echo $nimi$,$synniaasta,$tahtkuju;
 
+        echo $nimi,"<br>",$synniaasta,"<br>",$tahtkuju;
+        echo "<br>";
+        echo $nimi,"<br>".$synniaasta."<br>",$tahtkuju;
+        echo "<br>";
+        echo '"It\'s My Life" - Dr. Alban';
+        echo '<br>';
     ?>
+        <h2>Harjutus 02 - vormid</h2>
+        <form action="h01.php" method="get">
+            Arv1:<input type="number" name="arv1"><br>
+            Arv2:<input type="number" name="arv2"><br>
+            <input type="submit" value="Liida"><br>
+        </form>
+
+        <?php
+            if(!empty($_GET["arv1"]) && !emty($_GET["arv2"])){
+            $nr1 = $_GET["arv1"];
+            $nr2 = $_GET["arv2"];
+            $liida = $nr1 + $nr2;
+        
+            echo $liida;
+            }
+        
+        
+        ?>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
 </html>
