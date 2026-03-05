@@ -41,20 +41,22 @@
  <!-- /menüü -->
 <!-- /sisu -->
  <div class="container">
-        <div class="row">
+    <a href="index.php" class="btn btn-success">Tagasi</a>
 
-  <?php
+
+        <div class="row">
+ <?php
      $id = $_GET['id'];
      $paring = "SELECT * FROM cars WHERE id=".$id."";
      $valjund = mysqli_query($yhendus, $paring);  //saadan päringu andmebaasi
      $rida = mysqli_fetch_assoc($valjund); //sikutan vastuse alla
-     print_r($rida);
+     //print_r($rida);
      ?>
             <div class="col">
                 <h1>Nimi: <?php echo $rida["mark"]; ?><?php echo $rida["model"]; ?></h1>
                 <p>Mootor:<?php echo $rida["engine"]; ?></p>
                 <p>Kütus:<?php echo $rida["fuel"]; ?></p>
-                <p>Hind:<?php echo $rida["price"]; ?></p>
+                <p>Hind:<?php echo $rida["price"]; ?>€/päev</p>
                 
             </div>
             <div class="col">
