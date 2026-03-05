@@ -42,8 +42,24 @@
 <!-- /sisu -->
  <div class="container">
         <div class="row">
-            <div class="col"></div>
-            <div class="col"></div>
+
+  <?php
+     $id = $_GET['id'];
+     $paring = "SELECT * FROM cars WHERE id=".$id."";
+     $valjund = mysqli_query($yhendus, $paring);  //saadan päringu andmebaasi
+     $rida = mysqli_fetch_assoc($valjund); //sikutan vastuse alla
+     print_r($rida);
+     ?>
+            <div class="col">
+                <h1>Nimi: <?php echo $rida["mark"]; ?><?php echo $rida["model"]; ?></h1>
+                <p>Mootor:<?php echo $rida["engine"]; ?></p>
+                <p>Kütus:<?php echo $rida["fuel"]; ?></p>
+                <p>Hind:<?php echo $rida["price"]; ?></p>
+                
+            </div>
+            <div class="col">
+                 <img src="https://loremflickr.com/800/500/<?php echo str_replace(" ","", $rida["mark"]); ?>" class="card-img-top" alt="<?php echo str_replace(" ","", $rida["mark"]) ?>">
+            </div>
         </div>
 </div>
  <!-- /sisu -->
