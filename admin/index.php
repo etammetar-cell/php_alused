@@ -12,6 +12,8 @@
     
 <!-- /sisu -->
 <div class="container">
+  <h2>Adminni ala</h2>
+    <a href="lisa.php" class="btn btn-success">+ Lisa auto</a>
 <div class="row row-cols-1 row-cols-md-4 g-4">
     <!-- /1auto -->
      <?php
@@ -45,6 +47,8 @@
       <th scope="col">Engine</th>
       <th scope="col">Engine</th>
       <th scope="col">Engine</th>
+      <th scope="col">Kustuta</th>
+      <th scope="col">Muuda</th>
     </tr>
   </thead>
   <tbody>
@@ -52,6 +56,7 @@
       while($rida = mysqli_fetch_assoc($valjund)){ //sikutan vastuse alla
      //var_dump($rida);
     ?>
+    
     <tr>
       <th scope="row"><?php echo $rida["id"]; ?></th>
       <td><?php echo $rida["model"]; ?></td>
@@ -65,7 +70,8 @@
       <td><?php echo $rida["engine"]; ?></td>
       <td><?php echo $rida["engine"]; ?></td>
       <td><?php echo $rida["engine"]; ?></td>
-      
+      <td><a href="kustuta.php?delid=<?= $rida["id"]; ?>" class="btn btn-danger">Kustuta</a></td>
+      <td><a href="muuda.php?editid=<?= $rida["id"]; ?>" class="btn btn-warning">Muuda</a></td>
     </tr>
    <?php } ?>
 
