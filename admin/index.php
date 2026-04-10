@@ -17,7 +17,12 @@
 <div class="row row-cols-1 row-cols-md-4 g-4">
     <!-- /1auto -->
      <?php
-     
+     // sõnumi kuvamine
+      if(isset($_GET['msg'])){
+      echo '<div class="alert alert-success" role="alert">Kõik on hästi!</div>';
+    }
+
+      //autode kuvamine
      $paring = "SELECT * FROM cars";
      if (!empty($_GET["otsi"])){
         $otsing = $_GET["otsi"];

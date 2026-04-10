@@ -20,7 +20,8 @@
        $valjund = mysqli_query($yhendus, $sql);
        $tulemus = mysqli_affected_rows($yhendus);
         if ($tulemus == 1) {
-            echo "Kirje edukalt lisatud";
+            
+            header("Location: index.php?msg=lisatud");
         } else {
             echo "Kirjet ei lisatud";
         }
