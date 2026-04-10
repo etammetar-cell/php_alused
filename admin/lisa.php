@@ -57,7 +57,6 @@
                 <input type="text" class="form-control" id="status" name="status" value="vaba">
             </div>
 
-            </div>
             <input type="submit" value="Salvesta" class="btn btn-success">
         </div>
     </form>
