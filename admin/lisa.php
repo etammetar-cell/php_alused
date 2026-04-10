@@ -1,6 +1,31 @@
 <?php include('../config.php'); ?>
 <?php include('../header.php'); ?>
 
+<?php
+    if(!empty($_GET)){
+       $mark = $_GET['mark'];
+       $model = $_GET['model'];
+       $engine = $_GET['engine'];
+       $fuel = $_GET['fuel'];
+       $price = $_GET['price'];
+
+       $year = $_GET['year'];
+       $transmission = $_GET['transmission'];
+       $seats = $_GET['seats'];
+       $description = $_GET['description'];
+       $status = $_GET['status'];
+       
+      $sql = "INSERT INTO cars (mark, model, engine, fuel, price, year, transmission, seats, description, status) VALUES ('".$mark."', '".$model."', '".$engine."', '".$fuel."', '".$price."', '".$year."', '".$transmission."', '".$seats."', '".$description."', '".$status."')";
+
+       $valjund = mysqli_query($yhendus, $sql);
+       $tulemus = mysqli_affected_rows($yhendus);
+        if ($tulemus == 1) {
+            echo "Kirje edukalt lisatud";
+        } else {
+            echo "Kirjet ei lisatud";
+        }
+    }
+?>
     
 <!-- /sisu -->
 <div class="container">
