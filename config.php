@@ -2,8 +2,8 @@
 // Sinu andmed
 $db_server = 'localhost';
 $db_andmebaas = 'autorent';
-$db_kasutaja = 'erik';
-$db_salasona = 'passw0rd';
+$db_kasutaja = 'root';
+$db_salasona = '';
 
 
 // Ühendus andmebaasiga

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,13 +14,23 @@
     <?php
     $msg = "";
         if (!empty($_POST)) {
+
+
+
           $uname = $_POST['user'];
           $password = $_POST['password'];
-          $hash = '$2y$10$I1tDWSrtH3eycwNxvDVSs.oVcfXEgATXUGfhLq52TxGGwcGCDGIRW';
-           
+
+
+          $paring = "SELECT user, password FROM users WHERE user='".$uname."'";
+          $valjund = mysqli_query($yhendus, $paring);
+          $rida = mysqli_fetch_assoc($valjund);
+          //$hash = '$2y$10$I1tDWSrtH3eycwNxvDVSs.oVcfXEgATXUGfhLq52TxGGwcGCDGIRW';
+           $hash = $rida['password'];
           
            if ($uname=="admin" && password_verify($password, $hash)) {
-            echo "tere admin!";
+            $_SESSION['tuvastamine'] = 'misiganes';
+            header("Location: index.php");
+
             # code...
            } else {
             $msg = "kasutaja vale!";

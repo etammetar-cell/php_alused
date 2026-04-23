@@ -32,7 +32,9 @@
       <form class="d-flex" role="search" method="get" action="index.php">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="otsi">
         <button class="btn btn-outline-success" type="submit">Otsi</button>
+
       </form>
+      <a href="logout.php"  class="ms-4 btn btn-danger">Logi välja</a>
     </div>
   </div>
 </nav>
