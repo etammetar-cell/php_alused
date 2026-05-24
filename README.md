@@ -1,32 +1,95 @@
 # Autorent
 
-Selles etapis panin projekti Linuxi virtuaalmasinas tööle, kasutades Apache, PHP ja MariaDB lahendust.
+Autorent on PHP ja MariaDB põhine veebirakendus, kus klient saab vaadata autosid, registreeruda ja esitada auto rendibroneeringu. Administraator saab hallata autosid ja broneeringuid.
 
-Tegin andmebaasis järgmised muudatused:
-- olemasolev `cars` tabel jäi alles
-- lisasin uue `users` tabeli
-- lisasin uue `reservations` tabeli
-- sidusin `reservations.user_id` välja tabeliga `users.id`
-- sidusin `reservations.car_id` välja tabeliga `cars.id`
+## Käivitamine Dockeriga
 
-Lisaks:
-- lisasin testandmed tabelitesse `users` ja `reservations`
-- kontrollisin seoseid `JOIN` päringuga
-- tegin andmebaasist SQL dump faili `db/autorent_lopp.sql`
+Käivita projekt juurkaustas:
 
-Projekt töötab brauseris ning andmebaasi ühendus on toimiv.
+```bash
+docker compose up --build
+```
 
-Pildid tõestuseks
+Veebileht:
 
-Leht töötab brauseris.
-<img width="1863" height="983" alt="image" src="https://github.com/user-attachments/assets/5f757aec-755a-45a2-a125-fd996cae4dda" />
+```text
+http://localhost:8080
+```
 
-Admin leht töötab brauseris
-<img width="1869" height="990" alt="image" src="https://github.com/user-attachments/assets/c19867a2-b6b1-4e05-88fe-0bb52d63d75d" />
+phpMyAdmin:
 
-Tabelid
+```text
+http://localhost:8081
+```
 
-<img width="581" height="164" alt="image" src="https://github.com/user-attachments/assets/7ee55370-ae11-4419-9c78-c337ab4a33ce" />
-<img width="976" height="156" alt="image" src="https://github.com/user-attachments/assets/6d56119a-6250-4b31-bb1b-8d8c9a68ec40" />
-<img width="734" height="152" alt="image" src="https://github.com/user-attachments/assets/a152f913-faa4-487c-af14-047a21b23e2f" />
+## Kasutatud tehnoloogiad
 
+- PHP
+- Apache
+- MariaDB
+- phpMyAdmin
+- Bootstrap 5
+- Docker ja Docker Compose
+
+## Andmebaas
+
+Docker kasutab MariaDB andmebaasi nimega `autorent`.
+
+Andmebaasi kasutaja:
+
+```text
+autorent_user
+```
+
+Parool:
+
+```text
+autorent_pass
+```
+
+SQL dump imporditakse failist:
+
+```text
+db/autorent_lopp.sql
+```
+
+Põhitabelid:
+
+- `cars` - rendiautod
+- `users` - kliendid ja administraatorid
+- `reservations` - autode broneeringud
+
+## Funktsioonid
+
+- Avalehel kuvatakse autod Bootstrap kaartidena.
+- Klient saab avalehel registreeruda.
+- Klient saab auto detailvaates valida rendiperioodi ja salvestada broneeringu.
+- Sama autot ei saa samaks või kattuvaks perioodiks mitu korda rentida.
+- Kattuvuse kontroll ei arvesta `cancelled` staatusega broneeringuid.
+- Admin saab autosid lisada, muuta ja kustutada.
+- Admin näeb broneeringuid koos kliendi ja auto infoga.
+- Admin saab muuta broneeringu staatust: `pending`, `confirmed`, `cancelled`.
+- Admin saab broneeringuid kustutada.
+
+## Turvalisus
+
+- Andmebaasipäringutes kasutatakse prepared statements lahendust.
+- Kliendi registreerimisel kasutatakse `password_hash`.
+- Admini sisselogimisel kasutatakse `password_verify`.
+- Sisselogimine töötab PHP sessionite põhjal.
+- Admini failides kontrollitakse, et kasutaja oleks sisse loginud ja roll oleks `admin`.
+- Väljundis kasutatakse `htmlspecialchars` abifunktsiooni.
+
+## Admini testkasutaja
+
+SQL failis on admini kasutaja:
+
+```text
+erik@example.com
+```
+
+Parool:
+
+```text
+admin123
+```
