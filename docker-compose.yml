@@ -1,0 +1,34 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: autorent
+      MARIADB_USER: autorent_user
+      MARIADB_PASSWORD: autorent_pass
+      MARIADB_ROOT_PASSWORD: autorent_root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/autorent_lopp.sql:/docker-entrypoint-initdb.d/autorent.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: autorent_user
+      PMA_PASSWORD: autorent_pass
+    depends_on:
+      - db
+
+volumes:
+  db_data:

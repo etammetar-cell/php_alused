@@ -2118,7 +2118,7 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES
 (1,'user','Marko','Tamm','marko@example.com','5551001','hash1','2026-04-06 17:25:48'),
 (2,'user','Liisa','Kask','liisa@example.com','5551002','hash2','2026-04-06 17:25:48'),
-(3,'admin','Erik','Admin','erik@example.com','5551003','hash3','2026-04-06 17:25:48');
+(3,'admin','Erik','Admin','erik@example.com','5551003','$2y$10$iySLfO4ACmCAg4no4a.g.e5DsiBIN4t43aHCi6wqA9Ix5yXgVomyK','2026-04-06 17:25:48');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;

@@ -1,74 +1,62 @@
-<?php include('../config.php'); ?>
+<?php
+include('../config.php');
+require_admin();
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $mark = trim($_POST['mark'] ?? '');
+    $model = trim($_POST['model'] ?? '');
+    $engine = trim($_POST['engine'] ?? '');
+    $fuel = trim($_POST['fuel'] ?? '');
+    $price = (int)($_POST['price'] ?? 0);
+
+    if ($mark === '' || $model === '' || $engine === '' || $fuel === '' || $price <= 0) {
+        $error = 'Täida kõik väljad korrektselt.';
+    } else {
+        $stmt = mysqli_prepare($yhendus, 'INSERT INTO cars (mark, model, engine, fuel, price) VALUES (?, ?, ?, ?, ?)');
+        mysqli_stmt_bind_param($stmt, 'ssssi', $mark, $model, $engine, $fuel, $price);
+        mysqli_stmt_execute($stmt);
+        header('Location: index.php?msg=lisatud');
+        exit();
+    }
+}
+?>
 <?php include('../header.php'); ?>
 
-<?php
-    if(!empty($_GET)){
-       $mark = $_GET['mark'];
-       $model = $_GET['model'];
-       $engine = $_GET['engine'];
-       $fuel = $_GET['fuel'];
-       $price = $_GET['price'];
+<main class="container">
+  <h1 class="h3 mb-3">Auto lisamine</h1>
+  <?php if ($error !== '') { ?>
+    <div class="alert alert-danger" role="alert"><?php echo e($error); ?></div>
+  <?php } ?>
+  <form action="lisa.php" method="post" class="row g-3">
+    <div class="col-md-6">
+      <label for="mark" class="form-label">Mark</label>
+      <input type="text" class="form-control" id="mark" name="mark" required>
+    </div>
+    <div class="col-md-6">
+      <label for="model" class="form-label">Mudel</label>
+      <input type="text" class="form-control" id="model" name="model" required>
+    </div>
+    <div class="col-md-6">
+      <label for="engine" class="form-label">Mootor</label>
+      <input type="text" class="form-control" id="engine" name="engine" required>
+    </div>
+    <div class="col-md-6">
+      <label for="fuel" class="form-label">Kütus</label>
+      <input type="text" class="form-control" id="fuel" name="fuel" required>
+    </div>
+    <div class="col-md-6">
+      <label for="price" class="form-label">Hind päevas</label>
+      <input type="number" class="form-control" id="price" name="price" min="1" required>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-success">Salvesta</button>
+      <a href="index.php" class="btn btn-outline-secondary">Tagasi</a>
+    </div>
+  </form>
+</main>
 
-       $year = $_GET['year'];
-       $transmission = $_GET['transmission'];
-       $seats = $_GET['seats'];
-       $description = $_GET['description'];
-       $status = $_GET['status'];
-       
-      $sql = "INSERT INTO cars (mark, model, engine, fuel, price, year, transmission, seats, description, status) VALUES ('".$mark."', '".$model."', '".$engine."', '".$fuel."', '".$price."', '".$year."', '".$transmission."', '".$seats."', '".$description."', '".$status."')";
-
-       $valjund = mysqli_query($yhendus, $sql);
-       $tulemus = mysqli_affected_rows($yhendus);
-        if ($tulemus == 1) {
-            
-            header("Location: index.php?msg=lisatud");
-        } else {
-            echo "Kirjet ei lisatud";
-        }
-    }
-?>
-    
-<!-- /sisu -->
-<div class="container">
-    <h2>Auto lisamine</h2>
-    <form action="lisa.php" method="get">
-        <div class="row g-4">
-            <div class="col-sm-6">
-                <label for="mark" class="form-label">Mark</label>
-                <input type="text" class="form-control" id="mark" name="mark" value="test">
-                <label for="model" class="form-label">Model</label>
-                <input type="text" class="form-control" id="model" name="model" value="test">
-                <label for="engine" class="form-label">Mootor</label>
-                <input type="text" class="form-control" id="engine" name="engine" value="test">
-                <label for="fuel" class="form-label">Kütus</label>
-                <input type="text" class="form-control" id="fuel" name="fuel" value="test">
-                <label for="price" class="form-label">Hind</label>
-                <input type="number" class="form-control" id="price" name="price" value="123">
-            </div>
-            <div class="col-sm-6">
-                 <label for="year" class="form-label">Aasta</label>
-                <input type="number" class="form-control" id="year" name="year" value="2000">
-                <label for="transmission" class="form-label">Käigukast</label>
-                <input type="text" class="form-control" id="transmission" name="transmission" value="automaat">
-                <label for="seats" class="form-label">Istmete arv</label>
-                <input type="number" class="form-control" id="seats" name="seats" value="5">
-                <label for="description" class="form-label">Muu info</label>
-                <input type="text" class="form-control" id="description" name="description" value="test">
-                <label for="status" class="form-label">Olek</label>
-                <input type="text" class="form-control" id="status" name="status" value="vaba">
-            </div>
-
-            <input type="submit" value="Salvesta" class="btn btn-success">
-        </div>
-    </form>
-   
-
-</div>
-
-
-
-
- <!-- /sisu -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
 </html>

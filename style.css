@@ -1,0 +1,123 @@
+:root {
+    --brand: #0f766e;
+    --brand-dark: #134e4a;
+    --brand-soft: #ccfbf1;
+    --ink: #17221f;
+    --muted: #66736f;
+    --line: #dfe7e3;
+    --page: #f4f7f5;
+}
+
+body {
+    background: var(--page);
+    color: var(--ink);
+}
+
+.navbar {
+    box-shadow: 0 1px 14px rgba(19, 78, 74, 0.06);
+}
+
+.site-search {
+    gap: 0.5rem;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 3rem;
+}
+
+.hero-kicker {
+    color: var(--brand);
+}
+
+.text-primary {
+    color: var(--brand) !important;
+}
+
+.btn-primary {
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--brand-dark);
+    border-color: var(--brand-dark);
+}
+
+.btn-outline-primary {
+    color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+.card {
+    border-color: var(--line);
+    border-radius: 8px;
+}
+
+.car-card {
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(23, 34, 31, 0.06);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.car-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 38px rgba(23, 34, 31, 0.1);
+}
+
+.car-card-img {
+    height: 190px;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(0.96);
+}
+
+.car-detail-img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(0.96);
+}
+
+.price-badge {
+    align-self: flex-start;
+    background: var(--brand-soft);
+    border: 1px solid #99f6e4;
+    border-radius: 999px;
+    color: var(--brand-dark);
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.45rem 0.65rem;
+    white-space: nowrap;
+}
+
+.text-secondary {
+    color: var(--muted) !important;
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+}
+
+@media (max-width: 767.98px) {
+    .hero-section {
+        padding: 1.5rem;
+    }
+
+    .site-search {
+        margin-bottom: 0.75rem;
+        width: 100%;
+    }
+}
